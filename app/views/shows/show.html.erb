@@ -1,0 +1,136 @@
+<div class="nav_bar">
+	<div class="sub_nav left">
+		<%= link_to "Cinema Paradiso", root_path, class: "title" %>
+		<%= link_to "Programmazione", movies_path, class: "nav_item" %>
+		<% if user_signed_in? %>
+			<% if current_user.admin %>
+				<%= link_to "Prenotazioni", reservations_path, class: "nav_item" %>
+				<%= link_to "Spettacoli", shows_path, class: "nav_item" %>
+			<% elsif current_user.reservations.count > 0 %>
+				<%= link_to "Le mie prenotazioni", reservations_path, class: "nav_item" %>
+			<% end %>
+		<% end %>
+	</div>
+	<div class="sub_nav right">
+		<% if user_signed_in? %>
+			<%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav_item" %>
+		<% else %>
+			<%= link_to "Sign Up", new_user_registration_path, class: "nav_item" %>
+			<%= link_to "Sign In", new_user_session_path, class: "nav_item" %>
+		<% end %>
+	</div>
+</div>
+
+<% flash.each do |key, value| %>
+    <div class="notification <%= key %>"><%= value %></div>
+<% end %>
+
+<div class="shows_show">
+	<img class="poster", src="<%= @show.movie.poster.url(:large) %>"/>
+	<div class="info">
+		<a href="/movies/<%= @show.movie.id %>">
+			<div class="title"><%= @show.movie.title %></div>
+		</a>
+		<% date =  @show.datetime.strftime("%A %d") %>
+		<% if date == DateTime.now.strftime("%A %d") %>
+			<% date = "Oggi" %>
+		<% elsif date == (DateTime.now + 24.hours).strftime("%A %d") %>
+			<% date = "Domani" %>
+		<% end %>
+		<% date.sub! 'Monday', 'Lunedì' %>
+		<% date.sub! 'Tuesday', 'Martedì' %>
+		<% date.sub! 'Wednesday', 'Mercoledì' %>
+		<% date.sub! 'Thursday', 'Giovedì' %>
+		<% date.sub! 'Friday', 'Venerdì' %>
+		<% date.sub! 'Saturday', 'Sabato' %>
+		<% date.sub! 'Sunday', 'Domenica' %>
+		<% date.sub! 'Mon', 'Lun' %>
+		<% date.sub! 'Tue', 'Mar' %>
+		<% date.sub! 'Wed', 'Mer' %>
+		<% date.sub! 'Thu', 'Gio' %>
+		<% date.sub! 'Fri', 'Ven' %>
+		<% date.sub! 'Sat', 'Sab' %>
+		<% date.sub! 'Sun', 'Dom' %>
+		<div class="date"> - <%= date %></div>
+		<div class="time"><%= @show.datetime.strftime("%H:%M") %></div>
+		<div class="theater"><%= @show.theater.name %></div>
+		<div class="seats">
+			<div class="screen_container">
+				<div class="screen"></div>
+				<div>Schermo</div>
+			</div>
+			<% row = "" %>
+			<% @show.theater.seats.each do |seat| %>
+				<% if row != seat.row %>
+					<% if row != "" %>
+						</div>
+					<% end %>
+					<% row = seat.row %>
+					<div class="<%= row %>">
+						<div class="row">
+							<%= row %>
+						</div>
+				<% end %>
+				<div class="seat <%= row %><%= seat.number %><% unless seat.reservations.where(show: @show).empty? %> occupied<% end %>" onclick="select('<%= row %>', <%= seat.number %>)"><%= seat.number %></div>
+
+			<% end %>
+					</div>
+			<div class="legend">
+				<div class="sample"><div class="seat">X</div> posto libero</div>
+				<div class="sample"><div class="seat occupied">X</div> posto occupato</div>
+				<div class="sample"><div class="seat selected">X</div> posto selezionato</div>
+			</div>
+		</div>
+		<div class="reserve">
+		<%= form_tag("#{@show.id}/reserve") do %>
+			<%= hidden_field_tag(:seatsToReserve) %>
+			<% alreadyReserved = false %>
+			<% if user_signed_in? %>
+				<% unless current_user.admin %>
+					<% current_user.reservations.each do |reservation| %>
+						<% if reservation.show == @show && !alreadyReserved %>
+							<% alreadyReserved = true %>
+							<%= submit_tag value="Prenota", class: "reserve_button disabled", data: { confirm: "Hai già prenotato dei posti per questo spettacolo. Sei sicuro di voler continuare?" } %>
+						<% end %>
+					<% end %>
+				<% end %>
+			<% end %>
+			<% if !alreadyReserved %>
+				<%= submit_tag value="Prenota", class: "reserve_button disabled" %>
+			<% end %>
+		<% end %>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+    var seatsToReserve = "";
+    var select = function(row, number) {
+    	if (document.querySelector('.'+row+number).classList.contains("occupied")) {
+    		return
+    	}
+    	if (seatsToReserve.indexOf(row + pad(number, 2)) != -1) {
+			seatsToReserve = seatsToReserve.replace(row + pad(number, 2), "");
+		} else {
+			seatsToReserve = seatsToReserve + row + pad(number, 2);
+		}
+		$('#seatsToReserve').val(seatsToReserve);
+		var div = document.querySelector('.'+row+number) // Using a class instead, see note below.
+		div.classList.toggle('selected');
+		var button = document.querySelector(".reserve_button");
+		if (seatsToReserve.length / 3 != 0) {
+			button.value = "Prenota – " + (<%= @show.price %> * seatsToReserve.length / 3) + "€";
+		} else {
+			button.value = "Prenota";
+		}
+		if (seatsToReserve != "") {
+			button.classList.remove('disabled');
+		} else {
+			button.classList.add('disabled');
+		}
+    };
+    function pad(n, width, z) { // Aggiunge '0' davanti fino a ottenere n cifre. 
+  		z = z || '0';
+  		n = n + '';
+  		return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+	}
+</script>

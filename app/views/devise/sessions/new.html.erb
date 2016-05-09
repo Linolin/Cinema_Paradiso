@@ -1,0 +1,31 @@
+<div class="nav_bar">
+  <div class="sub_nav left">
+    <%= link_to "Cinema Paradiso", root_path, class: "title" %>
+    <%= link_to "Programmazione", movies_path, class: "nav_item" %>
+  </div>
+  <div class="sub_nav right">
+    <% if user_signed_in? %>
+      <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav_item" %>
+    <% else %>
+      <%= link_to "Sign Up", new_user_registration_path, class: "nav_item" %>
+    <% end %>
+  </div>
+</div>
+
+<% flash.each do |key, value| %>
+    <div class="notification <%= key %>"><%= value %></div>
+<% end %>
+
+<div class="new_user">
+<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="form-inputs">
+    <%= f.input :email, required: false, autofocus: true %>
+    <%= f.input :password, required: false %>
+    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Log in" %>
+  </div>
+<% end %>
+</div>

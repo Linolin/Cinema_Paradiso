@@ -1,0 +1,148 @@
+<div class="nav_bar">
+	<div class="sub_nav left">
+		<%= link_to "Cinema Paradiso", root_path, class: "title" %>
+		<%= link_to "Programmazione", movies_path, class: "nav_item selected" %>
+		<% if user_signed_in? %>
+			<% if current_user.admin %>
+				<%= link_to "Prenotazioni", reservations_path, class: "nav_item" %>
+				<%= link_to "Spettacoli", shows_path, class: "nav_item" %>
+			<% elsif current_user.reservations.count > 0 %>
+				<%= link_to "Le mie prenotazioni", reservations_path, class: "nav_item" %>
+			<% end %>
+		<% end %>
+	</div>
+	<div class="sub_nav right">
+		<% if user_signed_in? %>
+			<%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav_item" %>
+		<% else %>
+			<%= link_to "Sign Up", new_user_registration_path, class: "nav_item" %>
+			<%= link_to "Sign In", new_user_session_path, class: "nav_item" %>
+		<% end %>
+	</div>
+</div>
+
+<% flash.each do |key, value| %>
+    <div class="notification <%= key %>"><%= value %></div>
+<% end %>
+
+<div class="movies_index">
+	<div class="movies">
+		<% movies = 0 %>
+		<% if current_user && current_user.admin %>
+			<div class="movie" id="newMovie">
+				<% movies = movies + 1 %>
+				<a href="<%= new_movie_path %>">
+					<div class="poster_container">
+						<img class="poster cover", src="/images/missing_standard.jpg"/>
+						<div class="plus">+</div>
+						<div class="add_movie">Aggiungi film</div>
+					</div>
+				</a>
+			</div>
+		<% end %>
+		<% @movies.each do |movie| %>
+			<% unless (current_user && current_user.admin) || !movie.shows.where(datetime: (DateTime.now.beginning_of_day()..(DateTime.now + (6 * 24).hours).end_of_day())).empty? %>
+				<% next %>
+			<% end %>
+			<div class="movie">
+				<% movies = movies + 1 %>
+				<a href="<%= movie_path(movie) %>">
+					<div class="poster_container ">
+						<img class="poster cover", src="<%= movie.poster.url(:standard) %>"/>
+						<div class="poster_info">
+							<div class="plot"><%= truncate(movie.plot, :length => 200) %></div>
+							<div class="genere_duration_director">
+								<div class="genere"><%= movie.genere %></div>&nbsp;/&nbsp;
+								<div class="duration"><%= movie.duration %> min.</div>&nbsp;/&nbsp;
+								<div class="director">Regia <%= movie.director %></div>
+							</div>
+						</div>
+					</div>
+				</a>
+				<div class="info">
+					<div class="title"><a href="<%= movie_path(movie) %>"><%= movie.title %></a></div>
+					<div class="shows">
+						<% i = 0 %>
+						<% while i < 7 do %>
+							<div class="day">
+								<% unless movie.shows.where(datetime: (DateTime.now + (i * 24).hours).beginning_of_day()..(DateTime.now + (i * 24).hours).end_of_day()).empty? %>
+									<% date = (DateTime.now + (i * 24).hours).strftime("%a %d:") %>
+									<% if date == DateTime.now.strftime("%a %d:") %>
+										<% date = "Oggi:" %>
+									<% elsif date == (DateTime.now + 24.hours).strftime("%a %d:") %>
+										<% date = "Domani:" %>
+									<% end %>
+									<% date.sub! 'Monday', 'Lunedì' %>
+									<% date.sub! 'Tuesday', 'Martedì' %>
+									<% date.sub! 'Wednesday', 'Mercoledì' %>
+									<% date.sub! 'Thursday', 'Giovedì' %>
+									<% date.sub! 'Friday', 'Venerdì' %>
+									<% date.sub! 'Saturday', 'Sabato' %>
+									<% date.sub! 'Sunday', 'Domenica' %>
+									<% date.sub! 'Mon', 'Lun' %>
+									<% date.sub! 'Tue', 'Mar' %>
+									<% date.sub! 'Wed', 'Mer' %>
+									<% date.sub! 'Thu', 'Gio' %>
+									<% date.sub! 'Fri', 'Ven' %>
+									<% date.sub! 'Sat', 'Sab' %>
+									<% date.sub! 'Sun', 'Dom' %>
+									<div class="date"><%= date %>&nbsp;</div>
+									<div class="times">
+										<% movie.shows.where(datetime: (DateTime.now + (i * 24).hours).beginning_of_day()..(DateTime.now + (i * 24).hours).end_of_day()).order(:datetime).each do |show| %>
+											<a href="<%= show_path(show) %>"><div class="time <% if show.datetime < DateTime.now %>past<% end %>"><%= show.datetime.strftime("%H:%M") %></div></a>
+										<% end %>
+									</div>
+								<% end %>
+							</div>
+							<% i = i + 1 %>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		<% end %>
+	</div>
+	<% if movies > 5 %>
+		<div class="scroll_left">
+				<div class="arrow_container">
+					<img class="arrow_left", src="/images/arrow_left.png"/>
+				</div>
+		</div>
+		<div class="scroll_right">
+				<div class="arrow_container">
+					<img class="arrow_right", src="/images/arrow_right.png"/>
+				</div>
+		</div>
+	<% end %>
+</div>
+<script>
+	$(".arrow_right").click(function() {
+		var movieWidth = $(".movie").width();
+		var scrollLeft = $('.movies').scrollLeft();
+		var extra = 0;
+		if (scrollLeft % movieWidth != 0) {
+			extra = (movieWidth - scrollLeft % movieWidth);
+		}
+	  $('.movies').animate({scrollLeft: scrollLeft + extra + movieWidth}, 700);
+	});
+
+	$(".arrow_left").click(function() {
+		var movieWidth = $(".movie").width();
+		var scrollLeft = $('.movies').scrollLeft();
+	  $('.movies').animate({scrollLeft: scrollLeft - scrollLeft % movieWidth - movieWidth}, 700);
+	});
+
+	jQuery(function($) {
+    $('.movies').on('scroll', function() {
+        if($(this).scrollLeft() == 0) {
+           $(".arrow_left").hide();
+        } else {
+        	$(".arrow_left").show();
+        }
+        if($(".movie:last").position().left + $(".movie").width() == $(".movies").width()) {
+          $(".arrow_right").hide();
+        } else {
+        	$(".arrow_right").show();
+        }
+    })
+});
+</script>

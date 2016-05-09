@@ -1,0 +1,85 @@
+<div class="nav_bar">
+	<div class="sub_nav left">
+		<%= link_to "Cinema Paradiso", root_path, class: "title" %>
+		<%= link_to "Programmazione", movies_path, class: "nav_item" %>
+		<% if user_signed_in? %>
+			<% if current_user.admin %>
+				<%= link_to "Prenotazioni", reservations_path, class: "nav_item" %>
+				<%= link_to "Spettacoli", shows_path, class: "nav_item" %>
+			<% elsif current_user.reservations.count > 0 %>
+				<%= link_to "Le mie prenotazioni", reservations_path, class: "nav_item" %>
+			<% end %>
+		<% end %>
+	</div>
+	<div class="sub_nav right">
+		<% if user_signed_in? %>
+			<%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav_item" %>
+		<% else %>
+			<%= link_to "Sign Up", new_user_registration_path, class: "nav_item" %>
+			<%= link_to "Sign In", new_user_session_path, class: "nav_item" %>
+		<% end %>
+	</div>
+</div>
+
+<% flash.each do |key, value| %>
+    <div class="notification <%= key %>"><%= value %></div>
+<% end %>
+
+<div class="reservations_show">
+	<img class="poster", src="<%= @reservation.show.movie.poster.url(:large) %>"/>
+	<div class="info">
+	<a href="<%= movie_path(@reservation.show.movie) %>">
+		<div class="title"><%= @reservation.show.movie.title %></div>
+	</a>
+	<% date =  @reservation.show.datetime.strftime("%A %d") %>
+	<% if date == DateTime.now.strftime("%A %d") %>
+		<% date = "Oggi" %>
+	<% elsif date == (DateTime.now + 24.hours).strftime("%A %d") %>
+		<% date = "Domani" %>
+	<% end %>
+	<% date.sub! 'Monday', 'Lunedì' %>
+	<% date.sub! 'Tuesday', 'Martedì' %>
+	<% date.sub! 'Wednesday', 'Mercoledì' %>
+	<% date.sub! 'Thursday', 'Giovedì' %>
+	<% date.sub! 'Friday', 'Venerdì' %>
+	<% date.sub! 'Saturday', 'Sabato' %>
+	<% date.sub! 'Sunday', 'Domenica' %>
+	<% date.sub! 'Mon', 'Lun' %>
+	<% date.sub! 'Tue', 'Mar' %>
+	<% date.sub! 'Wed', 'Mer' %>
+	<% date.sub! 'Thu', 'Gio' %>
+	<% date.sub! 'Fri', 'Ven' %>
+	<% date.sub! 'Sat', 'Sab' %>
+	<% date.sub! 'Sun', 'Dom' %>
+	<div class="date"> - <%= date %></div>
+	<div class="time"><%= @reservation.show.datetime.strftime("%H:%M") %></div>
+	<div class="theater"><%= @reservation.show.theater.name %></div>
+	<div class="seats">
+		<div class="screen-container">
+			<div class="screen"></div>
+			<div>Schermo</div>
+		</div>
+		<% row = "" %>
+		<% @reservation.show.theater.seats.each do |seat| %>
+			<% if row != seat.row %>
+				<% if row != "" %>
+					</div>
+				<% end %>
+				<% row = seat.row %>
+				<div class="<%= row %>">
+					<div class="row">
+						<%= row %>
+					</div>
+			<% end %>
+			<div class="seat <%= row %><%= seat.number %><% @reservation.seats.each do |reservationSeat| %>
+				<% if seat == reservationSeat %>
+					 reserved
+				<% end %>
+			<% end %>" onclick="select('<%= row %>', <%= seat.number %>)"><%= seat.number %></div>
+		<% end %>
+				</div>
+		<div class="legend">
+			<div class="sample"><div class="seat reserved">X</div><% if @reservation.seats.count == 1 %>il tuo posto<% else %>i tuoi posti<% end %></div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,89 @@
+<%= simple_form_for @movie, html: {multipart: true} do |f| %>
+	<div class="nav_bar">
+		<div class="sub_nav left">
+			<%= link_to "Cinema Paradiso", root_path, class: "title" %>
+			<%= link_to "Programmazione", movies_path, class: "nav_item" %>
+			<% if user_signed_in? %>
+				<% if current_user.admin %>
+					<%= link_to "Prenotazioni", reservations_path, class: "nav_item" %>
+					<%= link_to "Spettacoli", shows_path, class: "nav_item" %>
+				<% elsif current_user.reservations.count > 0 %>
+					<%= link_to "Le mie prenotazioni", reservations_path, class: "nav_item" %>
+				<% end %>
+			<% end %>
+		</div>
+		<div class="sub_nav right">
+			<% if user_signed_in? %>
+				<%= link_to "Annulla", root_path, class: "nav_item" %>
+				<%= f.button :submit, value: "Salva", class: "nav_item" %>
+				<%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav_item" %>
+			<% else %>
+				<%= link_to "Sign Up", new_user_registration_path, class: "nav_item" %>
+				<%= link_to "Sign In", new_user_session_path, class: "nav_item" %>
+			<% end %>
+		</div>
+	</div>
+	
+	<% flash.each do |key, value| %>
+	    <div class="notification <%= key %>"><%= value %></div>
+	<% end %>
+
+	<div class="movies_form">
+		<% if user_signed_in? && current_user.admin %>
+			<img class="poster" id="poster" src="<%= @movie.poster.url(:large) %>"/>
+			<div class="info">
+				<div class="poster"><label>Poster</label><%= f.file_field :poster, id: "posterUpload" %>
+				</div>
+				<script>
+					function handleFileSelect(evt) {
+    				var files = evt.target.files; // FileList object
+    				// Loop through the FileList and render image files as thumbnails.
+    				for (var i = 0, f; f = files[i]; i++) {
+    	  			// Only process image files.
+    	  			if (!f.type.match('image.*')) {
+    	  			  continue;
+    	  			}
+    	  			var reader = new FileReader();
+    	  			// Closure to capture the file information.
+    	  			reader.onload = (function(theFile) {
+    	  		  	return function(e) {
+    	  	  	  	// Update image.
+    	  	  	  	document.getElementById("poster").src=e.target.result;
+    	  	  		};
+    	  			})(f);
+    	  			// Read in the image file as a data URL.
+    	  			reader.readAsDataURL(f);
+    				}	
+  				}
+  				document.getElementById('posterUpload').addEventListener('change', handleFileSelect, false);
+				</script>
+				<div class="title"><%= f.input :title, placeholder: 'Titanic', label: 'Titolo' %></div>
+				<div class="plot"><%= f.input :plot, placeholder: "Rose ha diciassette anni, una madre egoista, un fidanzato facoltoso e una vita pianificata. Imbarcata sul Titanic e insoddisfatta della propria subalternità al futuro sposo incontra Jack, romantico disegnatore della terza classe che ha vinto a poker un biglietto per l'America. Contro le convenzioni e il destino, che chiederà il conto in una notte senza luna, Rose e Jack si innamorano, spiegando il loro spirito come i motori del più grande transatlantico del mondo. Lanciato nella sua prima traversata oceanica il Titanic è colpito al cuore da un iceberg, 'affondando' millecinquecento persone e il futuro dei due giovani amanti. Ottantaquattro anni dopo l'ultracentenaria Rose, scampata al naufragio e sopravvissuta a Jack, racconterà a un gruppo di scienziati la meraviglia di un amore interclassista e la stupidità di un mondo diviso in classi. Un mondo che il Titanic inabisserà in un oceano nero il 15 aprile del 1912.", label: 'Trama' %></div>
+				<div class="genere_duration_director_actors">
+					<div class="duration"><%= f.input :duration, placeholder: '123', label: 'Durata' %></div>
+					<div class="director"><%= f.input :director, placeholder: 'James Cameron', label: 'Regista' %></div>
+					<div class="genere"><%= f.input :genere, placeholder: 'Drammatico', label: 'Genere' %></div>
+					<div class="actor_form">
+						<label>Attori</label>
+						<%= link_to_add_association "+ Aggiungi attore", f, :actors, "data-association-insertion-method": "append" %> 
+						<%= f.simple_fields_for :actors do |actor| %>
+							<%= render 'actor_fields', f: actor %>
+						<% end %>
+					</div>
+				</div>
+				<div class="trailer_url"><%= f.input :trailer_url, placeholder: '(URL YouTube)' %></div>
+				<div class="shows">
+					<div class="show_form">
+						<label>Spettacoli</label>
+						<%= link_to_add_association "+ Aggiungi spettacolo", f, :shows, "data-association-insertion-method": "append" %> 
+						<%= f.simple_fields_for :shows do |show| %>
+							<% if show.object.datetime > DateTime.now %>
+								<%= render 'show_fields', f: show %>
+							<% end %>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		<% end %>
+	</div>
+<% end %>

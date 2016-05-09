@@ -1,0 +1,33 @@
+<div class="nav_bar">
+  <div class="sub_nav left">
+    <%= link_to "Cinema Paradiso", root_path, class: "title" %>
+    <%= link_to "Programmazione", movies_path, class: "nav_item" %>
+  </div>
+  <div class="sub_nav right">
+    <% if user_signed_in? %>
+      <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav_item" %>
+    <% else %>
+      <%= link_to "Sign In", new_user_session_path, class: "nav_item" %>
+    <% end %>
+  </div>
+</div>
+
+<% flash.each do |key, value| %>
+    <div class="notification <%= key %>"><%= value %></div>
+<% end %>
+
+<div class="new_user">
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :email, required: true, autofocus: true %>
+    <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+    <%= f.input :password_confirmation, required: true %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Sign up" %>
+  </div>
+<% end %>
+</div>

@@ -1,0 +1,1211 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+/*------------------------------------------------------------------
+# [Color codes]
+
+# Accent:					#51B7CB
+# Negative: 			#F35F61
+# Body:						#212121
+# Faded:			 		#999999
+# Details:				#BCBCBC
+-------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+[Typography]
+
+Title:						36px "Ubuntu", "Trebuchet MS", sans-serif
+Body copy:				16px "Ubuntu", "Trebuchet MS", sans-serif
+Details:					14px "Ubuntu", "Trebuchet MS", sans-serif
+Headers:					22px "Ubuntu", "Trebuchet MS", sans-serif
+Labels: 					10px "Ubuntu", "Trebuchet MS", sans-serif
+Notifications:		16px bold "Ubuntu", "Trebuchet MS", sans-serif
+Buttons: 					16px "Arial Black", sans-serif
+-------------------------------------------------------------------*/
+
+body, div, img, a {
+	font-family: "Ubuntu", "Trebuchet MS", sans-serif;
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	min-width: 1080px;
+}
+
+a {
+	color: inherit;
+	font: inherit;
+	text-decoration: none;
+}
+
+.left {
+	float: left !important;
+}
+
+.right {
+	float: right !important;
+}
+
+.nav_bar {
+	background-color: white;
+	height: 56px;
+	left: 0;
+	line-height: 56px;
+	top: 0;
+	width: 100%;
+}
+
+.nav_bar .title {
+	color: #51B7CB;
+	font: 36px "Ubuntu", "Trebuchet MS", sans-serif;
+	height: inherit;
+	line-height: inherit;
+	margin-right: 20px;
+}
+
+.sub_nav {
+	display: inline-block;
+	height: inherit;
+	font-size: 0;
+	line-height: inherit;
+	padding: 0 20px;
+}
+
+.nav_item {
+	background-color: white; 
+	color: #212121;
+	display: inline-block;
+	height: inherit;
+	font: 16px "Arial Black", sans-serif;
+	line-height: inherit;
+	padding: 0 18px;
+	text-transform: uppercase;
+	vertical-align: top;
+}
+
+input.nav_item {
+	border: none;
+	cursor: pointer;
+}
+
+.nav_item.selected {
+	border-bottom: 5px #51B7CB solid;
+	height: -moz-calc(100% - 5px);
+	height: -webkit-calc(100% - 5px);
+	height: -o-calc(100% - 5px);
+	height: calc(100% - 5px);
+}
+
+.nav_item:hover {
+	background-color: #51B7CB; 
+	color: white;
+}
+
+.notification {
+	background-color: #51B7CB;
+	color: white;
+	height: 44px;
+	font: 16px bold "Ubuntu", "Trebuchet MS", sans-serif;
+	line-height: 44px;
+	padding: 0 20px;
+}
+
+.notification.error,
+.notification.alert {
+	background-color: #F35F61;
+}
+
+.notification.notice {
+	animation: fade 5s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes fade {
+	80% {
+		height: 44px;
+	}
+	100% {
+		height: 0px;
+	}
+}
+
+.cover {
+	height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.scroll_left {
+	width: 5%;
+	z-index: 1;
+	top: 56px;
+	position: absolute;
+}
+
+.scroll_right {
+	width: 5%;
+	z-index: 1;
+	top: 56px;
+	position: absolute;
+	right: 0;
+}
+
+.arrow_container {
+	padding-top: 600%; /* defines aspect ratio */
+	position: relative;
+	opacity: 0.5;
+	overflow: hidden;
+	width: 100%;
+}
+
+.arrow_container:hover {
+	opacity: 1;
+}
+
+.arrow_left {
+	bottom: 40%;
+	cursor: pointer;
+	display: none;
+	height: 15%;
+	left: 0;
+	position: absolute;
+	top: 40%;
+}
+
+.arrow_right {
+	bottom: 40%;
+	cursor: pointer;
+	height: 15%;
+	position: absolute;
+	right: 0;
+	top: 40%;
+}
+
+/* MOVIES INDEX */
+.movies_index .movies {
+	font-size: 0px;
+	overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.movies_index .movies .movie {
+	display: inline-block;
+	vertical-align: top;
+	white-space: normal;
+	width: 20%;
+}
+
+.movies_index .movies .movie .poster_container {
+	padding-top: 150%; /* defines aspect ratio */
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+}
+
+.movies_index .movies .movie .poster_container .poster {
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.movies_index .movies .movie .poster_container .plus {
+	background-color: white;
+	border-radius: 999px;
+	color: #51B7CB;
+	height: 100px;
+	font: 100px "HelveticaNeue-Light", sans-serif;
+	left: 50%;
+	line-height: 78px;
+	margin-top: -50px;
+	margin-left: -50px;
+	position: absolute;
+	text-align: center;
+	top: 50%;
+	width: 100px;
+}
+
+.movies_index .movies .movie .poster_container:hover .plus {
+	background-color: white;
+	color: #51B7CB;
+	height: 110px;
+	font-size: 105px;
+	left: 50%;
+	line-height: 87px;
+	margin-top: -55px;
+	margin-left: -55px;
+	top: 50%;
+	width: 110px;
+}
+
+.movies_index .movies .movie .poster_container .add_movie {
+	color: white;
+	height: 120px;
+	font: 16px "Arial Black", sans-serif;
+	left: 50%;
+	margin-top: 77px;
+	margin-left: -60px;
+	opacity: 0;
+	position: absolute;
+	text-align: center;
+	text-transform: uppercase;
+	
+	top: 50%;
+	width: 120px;
+}
+
+.movies_index .movies .movie .poster_container:hover .add_movie {
+	opacity: 1
+}
+
+.movies_index .movies .movie .poster_container .poster_info {
+	background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+	background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%);
+	background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%);
+	bottom: -100%;
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=0 );
+	left: 0px;
+	padding: 40px 12px 12px 12px;
+	position: absolute;
+	-o-transition: bottom 0.3s;
+	-moz-transition: bottom 0.3s;
+	-webkit-transition: bottom 0.3s;
+	transition: bottom 0.3s;
+	width: -moz-calc(100% - 24px);
+	width: -webkit-calc(100% - 24px);
+	width: -o-calc(100% - 24px);
+	width: calc(100% - 24px);
+}
+
+.movies_index .movies .movie .poster_container:hover .poster_info {
+	bottom: 0;
+	-o-transition: bottom 0.3s;
+	-moz-transition: bottom 0.3s;
+	-webkit-transition: bottom 0.3s;
+	transition: bottom 0.3s;
+}
+
+.movies_index .movies .movie .poster_info .plot {
+	color: white;
+	font: 16px "Ubuntu", "Trebuchet MS", sans-serif;
+	margin-bottom: 8px;
+}
+
+.movies_index .movies .movie .poster_info .genere_duration_director {
+	color: #BCBCBC;
+	font: 14px "Ubuntu", "Trebuchet MS", sans-serif;
+}
+
+.movies_index .movies .movie .poster_info .genere_duration_director .genere,
+.movies_index .movies .movie .poster_info .genere_duration_director .duration,
+.movies_index .movies .movie .poster_info .genere_duration_director .director {
+	display: inline-block;
+}
+
+.movies_index .movies .movie .info {
+	padding: 8px;
+	text-align: center;
+}
+
+.movies_index .movies .movie .info .title {
+	color: #212121;
+	font-family: "Ubuntu";
+	font-size: 20px;
+	margin-bottom: 8px;
+	text-align: center;
+	white-space: nowrap;
+}
+
+.movies_index .movies .movie .info .shows {
+	display: inline-block;
+	position: relative;
+	text-align: left;
+}
+
+.movies_index .movies .movie .info .shows .day {
+	margin: 0 12px;
+	margin-left: auto;
+	min-height: 29px;
+}
+
+.movies_index .movies .movie .info .shows .day .date {
+	color: #51B7CB;
+	display: inline-block;
+	font: 14px "Ubuntu", "Trebuchet MS", sans-serif;
+	padding-top: 4px;
+	text-align: right;
+	vertical-align: top;
+	width: 58px;
+}
+
+.movies_index .movies .movie .info .shows .day .times {
+	display: inline-block;
+	margin-right: 4px;
+	white-space: nowrap;
+	width: -moz-calc(100% - 65px);
+	width: -webkit-calc(100% - 65px);
+	width: -o-calc(100% - 65px);
+	width: calc(100% - 65px);
+}
+
+.movies_index .movies .movie .info .shows .day .times .time {
+	background-color: white;
+	border: 1px solid #51B7CB;
+	color: #212121;
+	cursor: pointer;
+	display: inline-block;
+	font: 14px "Ubuntu", "Trebuchet MS", sans-serif;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	padding: 3px;
+}
+
+.movies_index .movies .movie .info .shows .day .times .time.past {
+	color: #999999;
+	cursor: default;
+}
+
+.movies_index .movies .movie .info .shows .day .times a:last-child .time {
+	margin-right: 0px;
+}
+
+.movies_index .movies .movie .info .shows .day .times .time:hover {
+	background-color: #51B7CB;
+}
+
+.movies_index .movies .movie .info .shows .day .times .time.past:hover {
+	background-color: white;
+}
+
+/* MOVIES SHOW */
+.movies_show {
+	margin: auto;
+	max-width: 1600px;
+	height: -moz-calc(100% - 56px);
+	height: -webkit-calc(100% - 56px);
+	height: -o-calc(100% - 56px);
+	height: calc(100% - 56px);
+	width: 100%;
+}
+
+.movies_show .poster {
+	float: left;
+	margin-right: 40px;
+	max-height: -moz-calc(100vh - 56px);
+	max-height: -webkit-calc(100vh - 56px);
+	max-height: -o-calc(100vh - 56px);
+	max-height: calc(100vh - 56px);
+	max-width: 45%;
+	padding-left: 40px;
+}
+
+.movies_show .info {
+	height: -moz-calc(100vh - 56px);
+	height: -webkit-calc(100vh - 56px);
+	height: -o-calc(100vh - 56px);
+	height: calc(100vh - 56px);
+	overflow: scroll;
+	padding-right: 40px;
+}
+
+.movies_show .info .title {
+	color: #51B7CB;
+	display: inline-block;
+	font: 22px "Ubuntu", "Trebuchet MS", sans-serif;
+	margin-bottom: 12px;
+	margin-top: 22px;
+}
+
+.movies_show .info .plot {
+	color: #212121;
+	font: 16px "Ubuntu", "Trebuchet MS", sans-serif;
+	margin-bottom: 12px;
+	text-align: justify;
+}
+
+.movies_show .info .genere_duration_director_actors {
+	color: #BCBCBC;
+	display: inline-block;
+	font: 14px "Ubuntu", "Trebuchet MS", sans-serif;
+	margin-bottom: 12px;
+	margin-left: 4px;
+}
+
+.movies_show .info .genere_duration_director_actors .genere,
+.movies_show .info .genere_duration_director_actors .duration,
+.movies_show .info .genere_duration_director_actors .director,
+.movies_show .info .genere_duration_director_actors .actors,
+.movies_show .info .genere_duration_director_actors .actor {
+	display: inline-block;
+	margin: -4px;
+}
+
+.movies_show .info .trailer_container {
+    margin-bottom: 18px;
+    margin-top: 6px;
+    overflow: hidden;
+    padding-top: 56.25%; /* defines aspect ratio */
+    position: relative;
+    width: 100%;
+}
+
+.movies_show .info .trailer_container .trailer {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.movies_show .info .shows {
+	margin-bottom: 12px;
+	margin-top: 12px;
+}
+
+.movies_show .info .shows .day .date {
+	color: #51b7cb;
+	display: inline-block;
+	font: 14px "Ubuntu", "Trebuchet MS", sans-serif;
+	padding-top: 4px;
+	text-align: right;
+	vertical-align: top;
+	width: 58px;
+}
+
+.movies_show .info .shows .day .times {
+	display: inline-block;
+	font-size: 0;
+}
+
+.movies_show .info .shows .day .times .time {
+	background-color: white;
+	border: 1px solid #51B7CB;
+	color: #212121;
+	cursor: pointer;
+	display: inline-block;
+	font: 14px "Ubuntu", "Trebuchet MS", sans-serif;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	padding: 3px;
+}
+
+.movies_show .info .shows .day .times .time.past {
+	color: #999999;
+	cursor: default;
+}
+
+.movies_show .info .shows .day .times .time:hover {
+	background-color: #51B7CB;
+}
+
+.movies_show .info .shows .day .times .time.past:hover {
+	background-color: white;
+}
+
+/* MOVIES FORM */
+*:focus {
+	outline: none;
+}
+
+.movies_form label {
+	color: #51B7CB;
+	display: block;
+	font: 10px "Ubuntu", "Trebuchet MS", sans-serif;
+}
+
+.movies_form .actor_form .nested-fields label,
+.movies_form .show_form .nested-fields label {
+	display: none;
+}
+
+.movies_form div.poster,
+.movies_form .title,
+.movies_form .plot,
+.movies_form .duration,
+.movies_form .genere,
+.movies_form .director,
+.movies_form .actor_form,
+.movies_form .info .trailer_url,
+.movies_form .show_form {
+	margin-bottom: 10px;
+}
+
+.movies_form input,
+.movies_form textarea {
+	border: none;
+	width: 100%;
+}
+
+.movies_form textarea {
+	padding-left: 0px;
+}
+
+.movies_form img.poster {
+	float: left;
+	margin-right: 40px;
+	max-height: -moz-calc(100vh - 56px);
+	max-height: -webkit-calc(100vh - 56px);
+	max-height: -o-calc(100vh - 56px);
+	max-height: calc(100vh - 56px);
+	max-width: 45%;
+	padding-left: 40px;
+}
+
+.movies_form .info {
+	height: -moz-calc(100vh - 56px);
+	height: -webkit-calc(100vh - 56px);
+	height: -o-calc(100vh - 56px);
+	height: calc(100vh - 56px);
+	overflow: scroll;
+	padding-right: 40px;
+}
+
+.movies_form .info div.poster {
+	padding: 0px;
+}
+
+.movies_form .info .title,
+.movies_form .info .plot,
+.movies_form .info .genere_duration_director_actors .director,
+.movies_form .info .genere_duration_director_actors .genere,
+.movies_form .info .genere_duration_director_actors {
+	width: 100%;
+}
+
+.movies_form .info .title input {
+	color: #51B7CB;
+	font: 22px "Ubuntu", "Trebuchet MS", sans-serif;
+}
+
+.movies_form .info .plot textarea {
+	color: #212121;
+	height: 180px;
+	font: 16px "Ubuntu", "Trebuchet MS", sans-serif;
+	text-align: justify;
+}
+
+.movies_form .info .genere_duration_director_actors .duration input {
+	width: 42px;
+}
+
+.movies_form .info .genere_duration_director_actors .duration input,
+.movies_form .info .genere_duration_director_actors .director input,
+.movies_form .info .genere_duration_director_actors .genere input {
+	color: #212121;
+	font: 16px "Ubuntu", "Trebuchet MS", sans-serif;
+}
+
+.movies_form .info .genere_duration_director_actors .duration input {
+	display: block;
+}
+
+.movies_form .info .actor_form .movie_actors_name {
+	display: inline-block;
+	width: -moz-calc(100% - 50px);
+	width: -webkit-calc(100% - 50px);
+	width: -o-calc(100% - 50px);
+	width: calc(100% - 50px);
+}
+
+.movies_form .info .actor_form input {
+	color: #212121;
+	font: 16px "Ubuntu", "Trebuchet MS", sans-serif;
+}
+
+.movies_form .info .trailer_url input {
+	color: #212121;
+	font: 16px "Ubuntu", "Trebuchet MS", sans-serif;
+}
+
+.movies_form .info .show_form {
+	margin-bottom: 22px;
+}
+
+.movies_form .info .show_form .nested-fields {
+	margin-top: 2px;
+}
+
+.movies_form .info .show_form .nested-fields .form {
+	display: inline-block;
+	width: -moz-calc(100% - 30px);
+	width: -webkit-calc(100% - 30px);
+	width: -o-calc(100% - 30px);
+	width: calc(100% - 30px);
+}
+
+.movies_form .info a.add_fields {
+	color: #212121;
+	text-transform: uppercase;
+	font: 14px "Arial Black", sans-serif;	
+}
+
+.movies_form .info a.add_fields:hover {
+	color: #51B7CB;
+}
+
+.movies_form .info a.remove_fields {
+	color: #F35F61;
+	margin-right: 4px;
+	text-decoration: none;
+}
+
+.movies_form .info .show_form a.remove_fields {
+	position: relative;
+	top: 2px;
+}
+
+.movies_form .info .show_form div.input.datetime.optional.movie_shows_datetime {
+	display: inline-block;
+	width: 353px;
+}
+
+.movies_form .info .show_form div.input.select.optional.movie_shows_theater,
+.movies_form .info .show_form div.input.select.optional.movie_shows_price {
+	display: inline-block;
+}
+
+.movies_form .info .show_form .currency {
+	font-family: "HelveticaNeue-Light";
+	font-size: 14px;
+	vertical-align: -1px;
+}
+
+/* DEVISE, USERS */
+.new_user {
+	margin-left: -moz-calc(50% - 125px);
+	margin-left: -webkit-calc(50% - 125px);
+	margin-left: -o-calc(50% - 125px);
+	margin-left: calc(50% - 125px);
+	margin-top: -moz-calc(50vh - 155px);
+	margin-top: -webkit-calc(50vh - 155px);
+	margin-top: -o-calc(50vh - 155px);
+	margin-top: calc(50vh - 155px);
+	width: 250px;
+}
+
+.new_user label {
+	color: #51B7CB;
+	font: 10px "Ubuntu", "Trebuchet MS", sans-serif;
+}
+
+.new_user input {
+	border: #51B7CB 1px solid;
+	font: 14px "Ubuntu", "Trebuchet MS", sans-serif;
+	margin-bottom: 10px;
+	padding: 3px;
+	width: 100%;
+}
+
+.new_user .hint {
+	color: #999999;
+	font: 10px "Ubuntu", "Trebuchet MS", sans-serif;
+	position: relative;
+	top: -12px;
+}
+
+.new_user input.boolean {
+	position: relative;
+	left: -2px;
+	width: auto;
+}
+
+.new_user .user_remember_me label {
+	color: #999999;
+}
+
+.new_user .form-actions {
+	text-align: center;
+}
+
+.new_user .btn {
+	background-color: #51B7CB;
+	border: none;
+	color: white;
+	cursor: pointer;
+	display: inline-block;
+	height: 56px;
+	font: 16px "Arial Black", sans-serif;
+	margin: 0;
+	margin-top: 20px;
+	padding: 0 20px;
+	text-align: center;
+	text-decoration: none;
+	text-transform: uppercase;
+	width: auto;
+}
+
+.new_user .btn:hover {
+	background-color: white;
+	color: #51B7CB;
+}
+
+.new_user .error_notification {
+	display: none;
+}
+
+.new_user .error {
+	color: #F35F61;
+	display: block;
+	font: 14px "Ubuntu", "Trebuchet MS", sans-serif;
+	margin-top: -10px;
+	text-transform: uppercase;
+}
+
+/* SHOWS INDEX */
+.shows_index {
+	padding: 8px 0;
+}
+
+.shows_index .show {
+	border-bottom: 1px #51B7CB solid;
+	font: 22px "Ubuntu", "Trebuchet MS", sans-serif;
+	margin: 0 20px;
+	padding: 14px 0;
+}
+
+.shows_index .show:last-child {
+	border-bottom: none;
+}
+
+.shows_index .show .info {
+	border-bottom: none;
+	display: inline-block;
+	width: 30%
+}
+
+.shows_index .reservation .info:last-child {
+	width: 35%
+}
+
+.shows_index .show .info .title {
+	color: #51B7CB;
+	display: inline-block;
+}
+
+.shows_index .show .info .date {
+	color: #51B7CB;
+	display: inline-block;
+}
+
+.shows_index .show .info .time {
+	color: #212121;
+	display: inline-block;
+	padding: 0 5px;
+}
+
+.shows_index .show .info .theater {
+	color: #51B7CB;
+	display: inline-block;
+}
+
+.shows_index .show .info .label {
+	color: #212121;
+	display: inline-block;
+}
+
+.shows_index .show .info .seats {
+	color: #51B7CB;
+	display: inline-block;
+}
+
+/* SHOWS SHOW */
+.shows_show {
+	margin: auto;
+	max-width: 1600px;
+	height: -moz-calc(100% - 56px);
+	height: -webkit-calc(100% - 56px);
+	height: -o-calc(100% - 56px);
+	height: calc(100% - 56px);
+	width: 100%;
+}
+
+.shows_show .poster {
+	float: left;
+	max-height: -moz-calc(100vh - 56px);
+	max-height: -webkit-calc(100vh - 56px);
+	max-height: -o-calc(100vh - 56px);
+	max-height: calc(100vh - 56px);
+	max-width: 45%;
+	margin-right: 40px;
+	padding-left: 40px;
+}
+
+.shows_show .info {
+	height: -moz-calc(100vh - 56px);
+	height: -webkit-calc(100vh - 56px);
+	height: -o-calc(100vh - 56px);
+	height: calc(100vh - 56px);
+	overflow: scroll;
+	padding-right: 40px;
+}
+
+.shows_show .info .title {
+	color: #51B7CB;
+	display: inline-block;
+	font: 22px "Ubuntu", "Trebuchet MS", sans-serif;
+	margin-bottom: 12px;
+	margin-top: 22px;
+}
+
+.shows_show .info .date {
+	color: #51B7CB;
+	display: inline-block;
+	font: 22px "Ubuntu", "Trebuchet MS", sans-serif;
+	margin-bottom: 4px;
+	width: auto;
+}
+
+.shows_show .info .time {
+	color: #212121;
+	display: inline-block;
+	font: 22px "Ubuntu", "Trebuchet MS", sans-serif;
+	margin: 0 5px;
+	margin-bottom: 5px;
+	width: auto;
+}
+
+.shows_show .info .theater {
+	color: #51B7CB;
+	display: inline-block;
+	font: 22px "Ubuntu", "Trebuchet MS", sans-serif;
+}
+
+.shows_show .info .seats {
+	display: inline-block;
+	font-size: 0;
+	margin-top: 60px;
+	text-align: center;
+	width: 100%;
+}
+
+.shows_show .info .seats .screen_container {
+	color: #212121;
+	font: 14px "Ubuntu", "Trebuchet MS", sans-serif;
+	margin-bottom: 65px;
+	
+}
+
+.shows_show .info .seats .screen_container .screen {
+	background-color: white;
+	border: 1px solid #51B7CB;
+	display: inline-block;
+	height: 5px;
+	left: 12px;
+	position: relative;
+	width: 80%;
+}
+
+.shows_show .info .seats .row {
+	color: #212121;
+	display: inline-block;
+	font: 14px "Ubuntu", "Trebuchet MS", sans-serif;
+	margin-right: 5px;
+	text-align: left;
+	width: 19px;
+}
+
+.shows_show .info .seats .seat {
+	background-color: white;
+	border: 1px solid #51B7CB;
+	color: #212121;
+	cursor: pointer;
+	display: inline-block;
+	font: 14px "Ubuntu", "Trebuchet MS", sans-serif;
+	height: 16px;
+	line-height: 16px;
+	margin-bottom: 5px;
+	margin-right: 5px;
+	padding: 3px;
+	text-align: center;
+	width: 16px;
+}
+
+.shows_show .info .seats .seat:hover {
+	background-color: #51B7CB;
+}
+
+.shows_show .info .seats .seat.selected {
+	background-color: #51B7CB;
+}
+
+.shows_show .info .seats .seat.occupied,
+.shows_show .info .seats .seat.occupied:hover {
+	background-color: #F35F61 !important;
+	border-color: #F35F61 !important;
+	cursor: default;
+}
+
+.shows_show .info .legend {
+	font: 14px "Ubuntu", "Trebuchet MS", sans-serif;
+	margin-top: 40px;
+}
+
+.shows_show .info .legend .sample {
+	display: inline-block;
+	margin-right: 16px;
+}
+
+.shows_show .info .legend .seat {
+	cursor: default;
+}
+
+.shows_show .info .legend .seat:hover {
+	background-color: white;
+}
+
+.shows_show .info .legend .seat.selected:hover {
+	background-color: #51B7CB;
+}
+
+.shows_show .info .reserve {
+	margin-top: 25px;
+	text-align: center;
+}
+
+.shows_show .info .reserve .reserve_button {
+	background-color: #51B7CB;
+	border: none;
+	color: white;
+	cursor: pointer;
+	display: inline-block;
+	font: 16px "Arial Black", sans-serif;
+	height: 56px;
+	line-height: 56px;
+	margin: 0;
+	margin-top: 20px;
+	padding: 0 20px;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+.shows_show .info .reserve .reserve_button:hover {
+	background-color: white;
+	color: #51B7CB;
+}
+
+.shows_show .reserve_button.disabled,
+.shows_show .reserve_button.disabled:hover {
+	background-color: #999999 !important;
+	color: white !important;
+	cursor: default;	
+}
+
+/* RESERVATIONS INDEX */
+.reservations_index {
+	padding: 8px 0;
+}
+
+.reservations_index .reservation {
+	border-bottom: 1px #51B7CB solid;
+	font: 22px "Ubuntu", "Trebuchet MS", sans-serif;
+	margin: 0 20px;
+	padding: 14px 0;
+}
+
+.reservations_index .reservation:last-child {
+	border-bottom: none;
+}
+
+.reservations_index .reservation .info {
+	border-bottom: none;
+	display: inline-block;
+	width: 30%
+}
+
+.reservations_index .reservation .info:last-child {
+	width: 35%
+}
+
+.reservations_index .reservation .info .title {
+	color: #51B7CB;
+	display: inline-block;
+}
+
+.reservations_index .reservation .info .date {
+	color: #51B7CB;
+	display: inline-block;
+}
+
+.reservations_index .reservation .info .time {
+	color: #212121;
+	display: inline-block;
+	padding: 0 5px;
+}
+
+.reservations_index .reservation .info .theater {
+	color: #51B7CB;
+	display: inline-block;
+}
+
+.reservations_index .reservation .info .seat {
+	display: inline-block;
+	font-size: 0px;
+}
+
+.reservations_index .reservation .info .seat .label {
+	color: #212121;
+	width: 60px;
+}
+
+.reservations_index .reservation .info .seat .row {
+	color: #51B7CB;
+	display: inline-block;
+	font-size: 22px;
+}
+
+.reservations_index .reservation .info .seat .number {
+	color: #51B7CB;
+	display: inline-block;
+	font-size: 22px;
+}
+
+.reservations_index .reservation .info .user {
+	color: #212121;
+	display: inline-block;
+	position: absolute;
+	right: 20px;
+	padding: 0 5px;
+}
+
+/* RESERVATIONS SHOW */
+.reservations_show {
+	margin: auto;
+	max-width: 1600px;
+	height: -moz-calc(100% - 56px);
+	height: -webkit-calc(100% - 56px);
+	height: -o-calc(100% - 56px);
+	height: calc(100% - 56px);
+	width: 100%;
+}
+
+.reservations_show .poster {
+	float: left;
+	margin-right: 40px;
+	max-height: -moz-calc(100vh - 56px);
+	max-height: -webkit-calc(100vh - 56px);
+	max-height: -o-calc(100vh - 56px);
+	max-height: calc(100vh - 56px);
+	max-width: 45%;
+	padding-left: 40px;
+}
+
+.reservations_show .info {
+	height: -moz-calc(100vh - 56px);
+	height: -webkit-calc(100vh - 56px);
+	height: -o-calc(100vh - 56px);
+	height: calc(100vh - 56px);
+	overflow: scroll;
+	padding-right: 40px;
+}
+
+.reservations_show .info .title {
+	color: #51B7CB;
+	display: inline-block;
+	font: 22px "Ubuntu", "Trebuchet MS", sans-serif;
+	margin-bottom: 12px;
+	margin-top: 22px;
+}
+
+.reservations_show .info .date {
+	color: #51B7CB;
+	display: inline-block;
+	font: 22px "Ubuntu", "Trebuchet MS", sans-serif;
+	margin-bottom: 4px;
+	width: auto;
+}
+
+.reservations_show .info .time {
+	color: #212121;
+	display: inline-block;
+	font: 22px "Ubuntu", "Trebuchet MS", sans-serif;
+	margin: 0px 5px;
+	margin-bottom: 5px;
+	width: auto;
+}
+
+.reservations_show .info .theater {
+	color: #51b7cb;
+	display: inline-block;
+	font: 22px "Ubuntu", "Trebuchet MS", sans-serif;
+}
+
+.reservations_show .info .seats {
+	display: inline-block;
+	font-size: 0;
+	margin-top: 60px;
+	text-align: center;
+	width: 100%;
+}
+
+.reservations_show .info .seats .screen-container {
+	color: #212121;
+	font-family: "Ubuntu";
+	font-size: 14px;
+	margin-bottom: 65px;
+}
+
+.reservations_show .info .seats .screen {
+	background-color: white;
+	border: 1px solid #51B7CB;
+	display: inline-block;
+	height: 5px;
+	left: 12px;
+	position: relative;
+	width: 80%;
+}
+
+.reservations_show .info .seats .row {
+	color: #212121;
+	display: inline-block;
+	font: 14px "Ubuntu", "Trebuchet MS", sans-serif;
+	margin-right: 5px;
+	text-align: left;
+	width: 19px;
+}
+
+.reservations_show .info .seats .seat {
+	background-color: white;
+	border: 1px solid #51B7CB;
+	color: #212121;
+	display: inline-block;
+	height: 16px;
+	font-family: "Ubuntu";
+	font-size: 14px;
+	line-height: 16px;
+	margin-bottom: 5px;
+	margin-right: 5px;
+	padding: 3px;
+	text-align: center;
+	width: 16px;
+}
+
+.reservations_show .info .seats .seat.reserved {
+	background-color: #51B7CB !important;
+	border-color: #51B7CB !important;
+}
+
+.reservations_show .info .seats .legend {
+	font: 14px "Ubuntu", "Trebuchet MS", sans-serif;
+	margin-top: 40px;
+}
+
+.reservations_show .info .seats .legend .sample {
+	display: inline-block;
+	margin-right: 16px;
+}
+

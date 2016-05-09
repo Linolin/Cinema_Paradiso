@@ -1,0 +1,97 @@
+<div class="nav_bar">
+	<div class="sub_nav left">
+		<%= link_to "Cinema Paradiso", root_path, class: "title" %>
+		<%= link_to "Programmazione", movies_path, class: "nav_item" %>
+		<% if user_signed_in? %>
+			<% if current_user.admin %>
+				<%= link_to "Prenotazioni", reservations_path, class: "nav_item" %>
+				<%= link_to "Spettacoli", shows_path, class: "nav_item" %>
+			<% elsif current_user.reservations.count > 0 %>
+				<%= link_to "Le mie prenotazioni", reservations_path, class: "nav_item" %>
+			<% end %>
+		<% end %>
+	</div>
+	<div class="sub_nav right">
+		<% if user_signed_in? %>
+			<% if current_user.admin %>
+				<%= link_to "Modifica", edit_movie_path(@movie), class: "nav_item" %>
+			<% end %>
+			<%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav_item" %>
+		<% else %>
+			<%= link_to "Sign Up", new_user_registration_path, class: "nav_item" %>
+			<%= link_to "Sign In", new_user_session_path, class: "nav_item" %>
+		<% end %>
+	</div>
+</div>
+
+<% flash.each do |key, value| %>
+    <div class="notification <%= key %>"><%= value %></div>
+<% end %>
+
+<div class="movies_show">
+	<img class="poster", src="<%= @movie.poster.url(:large) %>"/>
+	<div class="info">
+		<div class="title"><%= @movie.title %></div>
+		<div class="plot"><%= @movie.plot %></div>
+		<div class="genere_duration_director_actors">
+			<div class="genere"><%= @movie.genere %></div>&nbsp;&nbsp;/&nbsp;&nbsp;
+			<div class="duration"><%= @movie.duration %> minuti</div>&nbsp;&nbsp;/&nbsp;&nbsp;
+			<div class="director">Regia <%= @movie.director %></div>
+			<div class="actors">
+				<% unless @movie.actors.empty? %>
+					&nbsp;&nbsp;/&nbsp;Con&nbsp;
+					<% comma = false %>
+					<% @movie.actors.each do |actor| %>
+						<% if comma %>
+							,&nbsp;
+						<% end %>
+						<div class="actor"><%= actor.name %></div>
+						<% comma = true %>
+					<% end %>
+				<% end %>
+				.
+			</div>
+		</div>
+		<% if @movie.trailer_url && @movie.trailer_url != "" %>
+			<div class="trailer_container">
+				<iframe class="trailer" frameborder="0" height="100%" width="100%" src="https://www.youtube.com/embed/<%= @movie.trailer_url %>?rel=0&amp;showinfo=0" allowfullscreen></iframe>
+			</div>
+		<% end %>
+		<div class="shows">
+			<% i = 0 %>
+			<% while i < 7 do %>
+				<div class="day">
+					<% unless @movie.shows.where(datetime: (DateTime.now + (i * 24).hours).beginning_of_day()..(DateTime.now + (i * 24).hours).end_of_day()).empty? %>
+						<% date = (DateTime.now + (i * 24).hours).strftime("%a %d:") %>
+						<% if date == DateTime.now.strftime("%a %d:") %>
+							<% date = "Oggi:" %>
+						<% elsif date == (DateTime.now + 24.hours).strftime("%a %d:") %>
+							<% date = "Domani:" %>
+						<% end %>
+						<% date.sub! 'Monday', 'Lunedì' %>
+						<% date.sub! 'Tuesday', 'Martedì' %>
+						<% date.sub! 'Wednesday', 'Mercoledì' %>
+						<% date.sub! 'Thursday', 'Giovedì' %>
+						<% date.sub! 'Friday', 'Venerdì' %>
+						<% date.sub! 'Saturday', 'Sabato' %>
+						<% date.sub! 'Sunday', 'Domenica' %>
+						<% date.sub! 'Mon', 'Lun' %>
+						<% date.sub! 'Tue', 'Mar' %>
+						<% date.sub! 'Wed', 'Mer' %>
+						<% date.sub! 'Thu', 'Gio' %>
+						<% date.sub! 'Fri', 'Ven' %>
+						<% date.sub! 'Sat', 'Sab' %>
+						<% date.sub! 'Sun', 'Dom' %>
+						<div class="date"><%= date %>&nbsp;</div>
+						<div class="times">
+							<% @movie.shows.where(datetime: (DateTime.now + (i * 24).hours).beginning_of_day()..(DateTime.now + (i * 24).hours).end_of_day()).order(:datetime).each do |show| %>
+								<a href="<%= show_path(show) %>"><div class="time <% if show.datetime < DateTime.now %>past<% end %>"><%= show.datetime.strftime("%H:%M") %></div></a>
+							<% end %>
+						</div>
+					<% end %>
+				</div>
+				<% i = i + 1 %>
+			<% end %>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,8 @@
+<%= link_to "Aggiungi sala", new_theater_path %>
+<% @theaters.each do |theater| %>
+	<div>
+		<h3><%= theater.name %></h3>
+		<div><%= theater.seats %></div>
+		<%= link_to "More info", theater %>
+	</div>
+<% end %>

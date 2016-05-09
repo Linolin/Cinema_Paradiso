@@ -1,0 +1,15 @@
+<div class="menu">
+	<%= link_to "Torna alla lista dei film", movies_path %>
+	<% if user_signed_in? %>
+		<%= link_to "Log out", destroy_user_session_path, method: :delete %>
+	<% else %>
+		<%= link_to "Sign Up", new_user_registration_path, class: "important" %>
+		<%= link_to "Sign In", new_user_session_path %>
+	<% end %>
+</div>
+<div class="users"><% @users.each do |user| %>
+	<div class="user">
+		<%= user.email %>
+		<%= user.admin %>
+	</div>
+<% end %></div>

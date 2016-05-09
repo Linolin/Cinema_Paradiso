@@ -1,0 +1,11 @@
+<%= link_to "Torna alla lista delle sale", theaters_path %>
+<h3><%= @theater.name %></h3>
+<div><%= @theater.seats %></div>
+<div>
+	<% @theater.shows.each do |show| %>
+		<div><%= show.movie.title %></div>
+		<div><%= show.datetime.to_formatted_s(:short) %></div>
+	<% end %>
+</div>
+<%= link_to "Modifica", edit_theater_path(@theater) %>
+<%= link_to "Elimina", theater_path(@theater), method: :delete, data: {confirm: "Questa azione non potrà essere annulata. Sei sicuro di voler eliminare la sala?"} %>

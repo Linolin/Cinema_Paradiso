@@ -1,0 +1,89 @@
+<div class="nav_bar">
+	<div class="sub_nav left">
+		<%= link_to "Cinema Paradiso", root_path, class: "title" %>
+		<%= link_to "Programmazione", movies_path, class: "nav_item" %>
+		<% if user_signed_in? %>
+			<% if current_user.admin %>
+				<%= link_to "Prenotazioni", reservations_path, class: "nav_item selected" %>
+				<%= link_to "Spettacoli", shows_path, class: "nav_item" %>
+			<% elsif current_user.reservations.count > 0 %>
+				<%= link_to "Le mie prenotazioni", reservations_path, class: "nav_item selected" %>
+			<% end %>
+		<% end %>
+	</div>
+	<div class="sub_nav right">
+		<% if user_signed_in? %>
+			<%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav_item" %>
+		<% else %>
+			<%= link_to "Sign Up", new_user_registration_path, class: "nav_item" %>
+			<%= link_to "Sign In", new_user_session_path, class: "nav_item" %>
+		<% end %>
+	</div>
+</div>
+
+<% flash.each do |key, value| %>
+    <div class="notification <%= key %>"><%= value %></div>
+<% end %>
+
+<div class="reservations_index">
+	<% @reservations.each do |reservation| %>
+		<% if !current_user.admin && reservation.user != current_user %>
+			<% next %>
+		<% end %>
+		<% if current_user.admin && reservation.user == current_user %>
+			<% next %>
+		<% end %>
+		<div class="reservation">
+			<div class="info">
+				<a href="/movies/<%= reservation.show.movie.id %>">
+					<div class="title"><%= reservation.show.movie.title %></div>
+				</a>
+			</div>
+			<div class="info">
+				<a href="/reservations/<%= reservation.id %>">
+					<% date =  reservation.show.datetime.strftime("%A %d") %>
+					<% if date == DateTime.now.strftime("%A %d") %>
+						<% date = "Oggi" %>
+					<% elsif date == (DateTime.now + 24.hours).strftime("%A %d") %>
+						<% date = "Domani" %>
+					<% end %>
+					<% date.sub! 'Monday', 'Lunedì' %>
+					<% date.sub! 'Tuesday', 'Martedì' %>
+					<% date.sub! 'Wednesday', 'Mercoledì' %>
+					<% date.sub! 'Thursday', 'Giovedì' %>
+					<% date.sub! 'Friday', 'Venerdì' %>
+					<% date.sub! 'Saturday', 'Sabato' %>
+					<% date.sub! 'Sunday', 'Domenica' %>
+					<% date.sub! 'Mon', 'Lun' %>
+					<% date.sub! 'Tue', 'Mar' %>
+					<% date.sub! 'Wed', 'Mer' %>
+					<% date.sub! 'Thu', 'Gio' %>
+					<% date.sub! 'Fri', 'Ven' %>
+					<% date.sub! 'Sat', 'Sab' %>
+					<% date.sub! 'Sun', 'Dom' %>
+					<div class="date"><%= date %></div>
+					<div class="time"><%= reservation.show.datetime.strftime("%H:%M") %></div>
+					<div class="theater"><%= reservation.show.theater.name %></div>
+				</a>
+			</div>
+			<div class="info">
+				<% if reservation.seats.count == 1 %>
+					<span class="label">Posto</span>
+				<% else %>
+					<span class="label">Posti</span>
+				<% end %>
+				<% reservation.seats.each do |seat| %>
+					<a href="/reservations/<%= reservation.id %>">
+						<div class="seat">
+							<div class="row"><%= seat.row %></div>
+							<div class="number"><%= seat.number %></div>
+						</div>
+					</a>
+				<% end %>
+				<% if current_user.admin %>
+					<div class="user"><%= reservation.user.email %></div>
+				<% end %>
+			</div>
+		</div>
+	<% end %>
+</div>
