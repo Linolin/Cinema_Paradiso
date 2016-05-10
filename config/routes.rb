@@ -9,7 +9,12 @@ Rails.application.routes.draw do
   root "movies#index"
 
   post 'shows/:id/reserve' => 'shows#reserve'
-
+  
+  scope '/api' do
+  	scope '/v1' do
+  		get '/movies', to: 'movies#api_index'
+  	end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -64,4 +69,5 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
 end

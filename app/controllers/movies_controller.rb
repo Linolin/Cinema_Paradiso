@@ -41,6 +41,11 @@ class MoviesController < ApplicationController
   	redirect_to movies_path
   end
 
+  def api_index
+    @movies = Movie.includes(:shows).order('shows.datetime ASC')
+    render json: @movies, status: :ok
+  end
+
   private
 
   def find_movie
