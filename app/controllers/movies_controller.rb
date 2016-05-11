@@ -42,8 +42,14 @@ class MoviesController < ApplicationController
   end
 
   def api_index
-    @movies = Movie.includes(:shows).order('shows.datetime ASC')
+    time_range = (DateTime.now.beginning_of_day())..((DateTime.now + (6 * 24).hours).end_of_day())
+    @movies = Movie.includes(:shows).where('shows.datetime' => time_range).order('shows.datetime ASC')
     render json: @movies, status: :ok
+  end
+
+  def api_show
+    @movie = Movie.find(params[:id])
+    render json: @movie, status: :ok
   end
 
   private

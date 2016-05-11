@@ -46,4 +46,15 @@ class ShowsController < ApplicationController
         redirect_to @show
       end
   end
+
+  def api_index
+    time_range = (DateTime.now.beginning_of_day())..((DateTime.now + (6 * 24).hours).end_of_day())
+    @shows = Show.all.where('datetime' => time_range).order("datetime ASC")
+    render json: @shows, status: :ok
+  end
+
+  def api_show
+    @show = Show.find(params[:id])
+    render json: @show, status: :ok
+  end
 end

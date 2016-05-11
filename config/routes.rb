@@ -9,10 +9,13 @@ Rails.application.routes.draw do
   root "movies#index"
 
   post 'shows/:id/reserve' => 'shows#reserve'
-  
+
   scope '/api' do
   	scope '/v1' do
   		get '/movies', to: 'movies#api_index'
+  		get '/movies/:id', to: 'movies#api_show'
+  		get '/shows', to: 'shows#api_index'
+  		get '/shows/:id', to: 'shows#api_show'
   	end
   end
   # The priority is based upon order of creation: first created -> highest priority.
