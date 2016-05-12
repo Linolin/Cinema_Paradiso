@@ -26,6 +26,12 @@ class TheatersController < ApplicationController
     render json: @theater, status: :ok
   end
 
+  def api_index_seats
+    @theater = Theater.find(params[:theater_id])
+    @seats = Seat.where(theater: @theater)
+    render json: @seats, status: :ok
+  end
+
   def edit
   end
 
