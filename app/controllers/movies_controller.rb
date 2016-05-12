@@ -42,7 +42,7 @@ class MoviesController < ApplicationController
   end
 
   def api_index
-    time_range = (DateTime.now.beginning_of_day())..((DateTime.now + (6 * 24).hours).end_of_day())
+    time_range = DateTime.now.beginning_of_day()..(DateTime.now.end_of_day()
     @movies = Movie.includes(:shows).where('shows.datetime' => time_range).order('shows.datetime ASC')
     render json: @movies, status: :ok
   end

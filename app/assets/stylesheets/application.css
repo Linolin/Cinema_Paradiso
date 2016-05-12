@@ -17,22 +17,22 @@
 /*------------------------------------------------------------------
 # [Color codes]
 
-# Accent:					#51B7CB
+# Accent:				#51B7CB
 # Negative: 			#F35F61
-# Body:						#212121
-# Faded:			 		#999999
+# Body:					#212121
+# Faded:			 	#999999
 # Details:				#BCBCBC
 -------------------------------------------------------------------*/
 /*------------------------------------------------------------------
 [Typography]
 
-Title:						36px "Ubuntu", "Trebuchet MS", sans-serif
+Title:					36px "Ubuntu", "Trebuchet MS", sans-serif
 Body copy:				16px "Ubuntu", "Trebuchet MS", sans-serif
-Details:					14px "Ubuntu", "Trebuchet MS", sans-serif
-Headers:					22px "Ubuntu", "Trebuchet MS", sans-serif
-Labels: 					10px "Ubuntu", "Trebuchet MS", sans-serif
-Notifications:		16px bold "Ubuntu", "Trebuchet MS", sans-serif
-Buttons: 					16px "Arial Black", sans-serif
+Details:				14px "Ubuntu", "Trebuchet MS", sans-serif
+Headers:				22px "Ubuntu", "Trebuchet MS", sans-serif
+Labels: 				10px "Ubuntu", "Trebuchet MS", sans-serif
+Notifications:			16px bold "Ubuntu", "Trebuchet MS", sans-serif
+Buttons: 				16px "Arial Black", sans-serif
 -------------------------------------------------------------------*/
 
 body, div, img, a {
