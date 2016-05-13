@@ -27,6 +27,9 @@
 
 <div class="shows_index">
 	<% @shows.each do |show| %>
+		<% if show.datetime < DateTime.now %>
+			<% next %>
+		<% end %>
 		<div class="show">
 			<div class="info">
 				<a href="movies/<%= show.movie.id %>">

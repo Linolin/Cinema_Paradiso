@@ -15,7 +15,6 @@ class ReservationsController < ApplicationController
 
   def index
     authenticate_user!
-    time_range = DateTime.now...(DateTime.now + 365.day)
     @reservations = Reservation.all
   end
 
