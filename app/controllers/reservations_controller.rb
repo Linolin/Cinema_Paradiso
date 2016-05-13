@@ -38,6 +38,12 @@ class ReservationsController < ApplicationController
     end
   end
 
+  def api_index_seats
+    @show = Show.find(params[:show_id])
+    @seats = Seat.includes(:reservations).where('reservations.show_id' => @show.id)
+    render json: @seats, status: :ok
+  end
+
   private
 
   def reservation_params

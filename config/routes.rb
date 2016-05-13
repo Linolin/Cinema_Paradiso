@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   		get '/shows/:id', to: 'shows#api_show'
   		get '/theaters/:id', to: 'theaters#api_show'
   		get '/seats/:theater_id', to: 'theaters#api_index_seats'
+  		get '/reservations/:show_id', to: 'reservations#api_index_seats'
   	end
   end
   # The priority is based upon order of creation: first created -> highest priority.
