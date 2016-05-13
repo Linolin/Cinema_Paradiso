@@ -33,6 +33,9 @@
 		<% if current_user.admin && reservation.user == current_user %>
 			<% next %>
 		<% end %>
+		<% if reservation.datetime < DateTime.now %>
+			<% next %>
+		<% end %>
 		<div class="reservation">
 			<div class="info">
 				<a href="/movies/<%= reservation.show.movie.id %>">
