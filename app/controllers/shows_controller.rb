@@ -61,9 +61,9 @@ class ShowsController < ApplicationController
   def api_reserve_seats
     @user = User.find_by_email(params[:email])
     if @user && @user.valid_password?(params[:password])
-      #in
+      render json: @user, status: :ok
     elsif
-      #fuck you
+      render json: @user, status: :ok
     end
   end
 end
