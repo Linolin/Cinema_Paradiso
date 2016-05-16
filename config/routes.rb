@@ -14,10 +14,10 @@ Rails.application.routes.draw do
   	scope '/v1' do
   		get '/movies', to: 'movies#api_index'
   		get '/movies/:id', to: 'movies#api_show'
+      get '/movies/:id/actors', to: 'movies#api_index_movie_actors'
   		get '/shows', to: 'shows#api_index'
   		get '/shows/:id', to: 'shows#api_show'
   		get '/theaters/:id', to: 'theaters#api_show'
-      get '/movies/:id/actors', to: 'movies#api_index_movie_actors'
   		get '/seats/:theater_id', to: 'theaters#api_index_seats'
   		get '/reservations/:show_id', to: 'reservations#api_index_reserved_seats'
       get 'shows/:id/reserve/:seats/:email/:password', to: 'shows#api_reserve_seats'
