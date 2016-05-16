@@ -10609,3 +10609,109 @@ Processing by ShowsController#api_reserve_seats as HTML
   Parameters: {"id"=>"81", "seats"=>"h11", "email"=>"admin", "password"=>"[FILTERED]"}
   [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT 1[0m  [["email", "admin"]]
 Completed 200 OK in 4ms (Views: 0.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/" for ::1 at 2016-05-16 13:50:46 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MoviesController#index as HTML
+  [1m[35mSQL (6.9ms)[0m  SELECT "movies"."id" AS t0_r0, "movies"."title" AS t0_r1, "movies"."plot" AS t0_r2, "movies"."duration" AS t0_r3, "movies"."director" AS t0_r4, "movies"."actor_id" AS t0_r5, "movies"."genere" AS t0_r6, "movies"."trailer_url" AS t0_r7, "movies"."created_at" AS t0_r8, "movies"."updated_at" AS t0_r9, "movies"."poster_file_name" AS t0_r10, "movies"."poster_content_type" AS t0_r11, "movies"."poster_file_size" AS t0_r12, "movies"."poster_updated_at" AS t0_r13, "shows"."id" AS t1_r0, "shows"."datetime" AS t1_r1, "shows"."movie_id" AS t1_r2, "shows"."theater_id" AS t1_r3, "shows"."price" AS t1_r4, "shows"."created_at" AS t1_r5, "shows"."updated_at" AS t1_r6 FROM "movies" LEFT OUTER JOIN "shows" ON "shows"."movie_id" = "movies"."id"  ORDER BY shows.datetime ASC
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-16 00:00:00.000000' AND '2016-05-22 23:59:59.000000')[0m  [["movie_id", 1]]
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-16 00:00:00.000000' AND '2016-05-16 23:59:59.000000')  [["movie_id", 1]]
+  [1m[36mShow Load (0.2ms)[0m  [1mSELECT "shows".* FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-16 00:00:00.000000' AND '2016-05-16 23:59:59.000000')  ORDER BY "shows"."datetime" ASC[0m  [["movie_id", 1]]
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-17 00:00:00.000000' AND '2016-05-17 23:59:59.000000')  [["movie_id", 1]]
+  [1m[36mShow Load (0.3ms)[0m  [1mSELECT "shows".* FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-17 00:00:00.000000' AND '2016-05-17 23:59:59.000000')  ORDER BY "shows"."datetime" ASC[0m  [["movie_id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-18 00:00:00.000000' AND '2016-05-18 23:59:59.000000')  [["movie_id", 1]]
+  [1m[36mShow Load (0.3ms)[0m  [1mSELECT "shows".* FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-18 00:00:00.000000' AND '2016-05-18 23:59:59.000000')  ORDER BY "shows"."datetime" ASC[0m  [["movie_id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-19 00:00:00.000000' AND '2016-05-19 23:59:59.000000')  [["movie_id", 1]]
+  [1m[36mShow Load (0.2ms)[0m  [1mSELECT "shows".* FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-19 00:00:00.000000' AND '2016-05-19 23:59:59.000000')  ORDER BY "shows"."datetime" ASC[0m  [["movie_id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-20 00:00:00.000000' AND '2016-05-20 23:59:59.000000')  [["movie_id", 1]]
+  [1m[36mShow Load (0.3ms)[0m  [1mSELECT "shows".* FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-20 00:00:00.000000' AND '2016-05-20 23:59:59.000000')  ORDER BY "shows"."datetime" ASC[0m  [["movie_id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-21 00:00:00.000000' AND '2016-05-21 23:59:59.000000')  [["movie_id", 1]]
+  [1m[36mShow Load (0.2ms)[0m  [1mSELECT "shows".* FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-21 00:00:00.000000' AND '2016-05-21 23:59:59.000000')  ORDER BY "shows"."datetime" ASC[0m  [["movie_id", 1]]
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-22 00:00:00.000000' AND '2016-05-22 23:59:59.000000')  [["movie_id", 1]]
+  [1m[36mShow Load (0.2ms)[0m  [1mSELECT "shows".* FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-22 00:00:00.000000' AND '2016-05-22 23:59:59.000000')  ORDER BY "shows"."datetime" ASC[0m  [["movie_id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-16 00:00:00.000000' AND '2016-05-22 23:59:59.000000')  [["movie_id", 2]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-16 00:00:00.000000' AND '2016-05-16 23:59:59.000000')[0m  [["movie_id", 2]]
+  [1m[35mShow Load (0.2ms)[0m  SELECT "shows".* FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-16 00:00:00.000000' AND '2016-05-16 23:59:59.000000')  ORDER BY "shows"."datetime" ASC  [["movie_id", 2]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-17 00:00:00.000000' AND '2016-05-17 23:59:59.000000')[0m  [["movie_id", 2]]
+  [1m[35mShow Load (0.2ms)[0m  SELECT "shows".* FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-17 00:00:00.000000' AND '2016-05-17 23:59:59.000000')  ORDER BY "shows"."datetime" ASC  [["movie_id", 2]]
+  [1m[36m (2.2ms)[0m  [1mSELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-18 00:00:00.000000' AND '2016-05-18 23:59:59.000000')[0m  [["movie_id", 2]]
+  [1m[35mShow Load (0.3ms)[0m  SELECT "shows".* FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-18 00:00:00.000000' AND '2016-05-18 23:59:59.000000')  ORDER BY "shows"."datetime" ASC  [["movie_id", 2]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-19 00:00:00.000000' AND '2016-05-19 23:59:59.000000')[0m  [["movie_id", 2]]
+  [1m[35mShow Load (0.2ms)[0m  SELECT "shows".* FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-19 00:00:00.000000' AND '2016-05-19 23:59:59.000000')  ORDER BY "shows"."datetime" ASC  [["movie_id", 2]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-20 00:00:00.000000' AND '2016-05-20 23:59:59.000000')[0m  [["movie_id", 2]]
+  [1m[35mShow Load (0.2ms)[0m  SELECT "shows".* FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-20 00:00:00.000000' AND '2016-05-20 23:59:59.000000')  ORDER BY "shows"."datetime" ASC  [["movie_id", 2]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-21 00:00:00.000000' AND '2016-05-21 23:59:59.000000')[0m  [["movie_id", 2]]
+  [1m[35mShow Load (0.2ms)[0m  SELECT "shows".* FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-21 00:00:00.000000' AND '2016-05-21 23:59:59.000000')  ORDER BY "shows"."datetime" ASC  [["movie_id", 2]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-22 00:00:00.000000' AND '2016-05-22 23:59:59.000000')[0m  [["movie_id", 2]]
+  [1m[35mShow Load (0.2ms)[0m  SELECT "shows".* FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-22 00:00:00.000000' AND '2016-05-22 23:59:59.000000')  ORDER BY "shows"."datetime" ASC  [["movie_id", 2]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-16 00:00:00.000000' AND '2016-05-22 23:59:59.000000')[0m  [["movie_id", 3]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-16 00:00:00.000000' AND '2016-05-16 23:59:59.000000')  [["movie_id", 3]]
+  [1m[36mShow Load (0.2ms)[0m  [1mSELECT "shows".* FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-16 00:00:00.000000' AND '2016-05-16 23:59:59.000000')  ORDER BY "shows"."datetime" ASC[0m  [["movie_id", 3]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-17 00:00:00.000000' AND '2016-05-17 23:59:59.000000')  [["movie_id", 3]]
+  [1m[36mShow Load (0.2ms)[0m  [1mSELECT "shows".* FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-17 00:00:00.000000' AND '2016-05-17 23:59:59.000000')  ORDER BY "shows"."datetime" ASC[0m  [["movie_id", 3]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-18 00:00:00.000000' AND '2016-05-18 23:59:59.000000')  [["movie_id", 3]]
+  [1m[36mShow Load (0.2ms)[0m  [1mSELECT "shows".* FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-18 00:00:00.000000' AND '2016-05-18 23:59:59.000000')  ORDER BY "shows"."datetime" ASC[0m  [["movie_id", 3]]
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-19 00:00:00.000000' AND '2016-05-19 23:59:59.000000')  [["movie_id", 3]]
+  [1m[36mShow Load (0.2ms)[0m  [1mSELECT "shows".* FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-19 00:00:00.000000' AND '2016-05-19 23:59:59.000000')  ORDER BY "shows"."datetime" ASC[0m  [["movie_id", 3]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-20 00:00:00.000000' AND '2016-05-20 23:59:59.000000')  [["movie_id", 3]]
+  [1m[36mShow Load (0.2ms)[0m  [1mSELECT "shows".* FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-20 00:00:00.000000' AND '2016-05-20 23:59:59.000000')  ORDER BY "shows"."datetime" ASC[0m  [["movie_id", 3]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-21 00:00:00.000000' AND '2016-05-21 23:59:59.000000')  [["movie_id", 3]]
+  [1m[36mShow Load (0.2ms)[0m  [1mSELECT "shows".* FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-21 00:00:00.000000' AND '2016-05-21 23:59:59.000000')  ORDER BY "shows"."datetime" ASC[0m  [["movie_id", 3]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-22 00:00:00.000000' AND '2016-05-22 23:59:59.000000')  [["movie_id", 3]]
+  [1m[36mShow Load (0.2ms)[0m  [1mSELECT "shows".* FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-22 00:00:00.000000' AND '2016-05-22 23:59:59.000000')  ORDER BY "shows"."datetime" ASC[0m  [["movie_id", 3]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-16 00:00:00.000000' AND '2016-05-22 23:59:59.000000')  [["movie_id", 4]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-16 00:00:00.000000' AND '2016-05-22 23:59:59.000000')[0m  [["movie_id", 5]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-16 00:00:00.000000' AND '2016-05-22 23:59:59.000000')  [["movie_id", 6]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-16 00:00:00.000000' AND '2016-05-16 23:59:59.000000')[0m  [["movie_id", 6]]
+  [1m[35mShow Load (0.2ms)[0m  SELECT "shows".* FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-16 00:00:00.000000' AND '2016-05-16 23:59:59.000000')  ORDER BY "shows"."datetime" ASC  [["movie_id", 6]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-17 00:00:00.000000' AND '2016-05-17 23:59:59.000000')[0m  [["movie_id", 6]]
+  [1m[35mShow Load (0.2ms)[0m  SELECT "shows".* FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-17 00:00:00.000000' AND '2016-05-17 23:59:59.000000')  ORDER BY "shows"."datetime" ASC  [["movie_id", 6]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-18 00:00:00.000000' AND '2016-05-18 23:59:59.000000')[0m  [["movie_id", 6]]
+  [1m[35mShow Load (0.2ms)[0m  SELECT "shows".* FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-18 00:00:00.000000' AND '2016-05-18 23:59:59.000000')  ORDER BY "shows"."datetime" ASC  [["movie_id", 6]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-19 00:00:00.000000' AND '2016-05-19 23:59:59.000000')[0m  [["movie_id", 6]]
+  [1m[35mShow Load (0.2ms)[0m  SELECT "shows".* FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-19 00:00:00.000000' AND '2016-05-19 23:59:59.000000')  ORDER BY "shows"."datetime" ASC  [["movie_id", 6]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-20 00:00:00.000000' AND '2016-05-20 23:59:59.000000')[0m  [["movie_id", 6]]
+  [1m[35mShow Load (0.2ms)[0m  SELECT "shows".* FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-20 00:00:00.000000' AND '2016-05-20 23:59:59.000000')  ORDER BY "shows"."datetime" ASC  [["movie_id", 6]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-21 00:00:00.000000' AND '2016-05-21 23:59:59.000000')[0m  [["movie_id", 6]]
+  [1m[35mShow Load (0.2ms)[0m  SELECT "shows".* FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-21 00:00:00.000000' AND '2016-05-21 23:59:59.000000')  ORDER BY "shows"."datetime" ASC  [["movie_id", 6]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-22 00:00:00.000000' AND '2016-05-22 23:59:59.000000')[0m  [["movie_id", 6]]
+  [1m[35mShow Load (0.2ms)[0m  SELECT "shows".* FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-22 00:00:00.000000' AND '2016-05-22 23:59:59.000000')  ORDER BY "shows"."datetime" ASC  [["movie_id", 6]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "shows" WHERE "shows"."movie_id" = ? AND ("shows"."datetime" BETWEEN '2016-05-16 00:00:00.000000' AND '2016-05-22 23:59:59.000000')[0m  [["movie_id", 7]]
+  Rendered movies/index.html.erb within layouts/application (273.5ms)
+Completed 200 OK in 807ms (Views: 754.1ms | ActiveRecord: 22.5ms)
+
+
+Started GET "/api/v1/shows/81/reserve/h11/admin/password" for ::1 at 2016-05-16 13:50:48 +0200
+Processing by ShowsController#api_reserve_seats as HTML
+  Parameters: {"id"=>"81", "seats"=>"h11", "email"=>"admin", "password"=>"[FILTERED]"}
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT 1  [["email", "admin"]]
+Completed 200 OK in 8ms (Views: 0.3ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/api/v1/theaters" for ::1 at 2016-05-16 13:50:51 +0200
+Processing by TheatersController#api_index as HTML
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 0.0ms)
+
+NameError (uninitialized constant TheatersController::Theaters):
+  app/controllers/theaters_controller.rb:25:in `api_index'
+
+
+  Rendered /Users/Paolo/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (8.0ms)
+  Rendered /Users/Paolo/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (7.4ms)
+  Rendered /Users/Paolo/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (3.3ms)
+  Rendered /Users/Paolo/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (155.2ms)
+  Rendered /Users/Paolo/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.6ms)
+  Rendered /Users/Paolo/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/Paolo/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.6ms)
+  Rendered /Users/Paolo/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.6ms)
+  Rendered /Users/Paolo/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (195.7ms)
+  Rendered /Users/Paolo/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/Paolo/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.9ms)
+  Rendered /Users/Paolo/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (403.8ms)
+
+
+Started GET "/api/v1/theaters" for ::1 at 2016-05-16 13:51:02 +0200
+Processing by TheatersController#api_index as HTML
+  [1m[36mTheater Load (0.8ms)[0m  [1mSELECT "theaters".* FROM "theaters"[0m
+Completed 200 OK in 14ms (Views: 7.9ms | ActiveRecord: 1.2ms)

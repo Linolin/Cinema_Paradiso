@@ -22,7 +22,7 @@ class TheatersController < ApplicationController
   end
 
   def api_index
-    @theaters = Theaters.all
+    @theaters = Theater.all
     render json: @theaters, status: :ok
   end
 
