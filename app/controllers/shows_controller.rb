@@ -87,7 +87,7 @@ class ShowsController < ApplicationController
           if alreadyReserved
             render json: "alreadyreserved", status: :ok
           else
-            render json: reservation, stauts: :ok
+            render json: "ok", stauts: :ok
           end
         end
       else 
