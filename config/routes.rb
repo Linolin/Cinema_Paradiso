@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       get '/movies/:id/actors', to: 'movies#api_index_movie_actors'
   		get '/shows', to: 'shows#api_index'
   		get '/shows/:id', to: 'shows#api_show'
+      get '/theaters', to: 'theaters#api_index'
   		get '/theaters/:id', to: 'theaters#api_show'
   		get '/seats/:theater_id', to: 'theaters#api_index_seats'
   		get '/reservations/:show_id', to: 'reservations#api_index_reserved_seats'

@@ -21,6 +21,11 @@ class TheatersController < ApplicationController
   def show
   end
 
+  def api_index
+    @theaters = Theaters.all
+    render json: @theaters, status: :ok
+  end
+
   def api_show
     @theater = Theater.find(params[:id])
     render json: @theater, status: :ok
