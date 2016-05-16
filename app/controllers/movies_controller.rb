@@ -52,6 +52,12 @@ class MoviesController < ApplicationController
     render json: @movie, status: :ok
   end
 
+  def api_index_movie_actors
+    @movie = Movie.find(params[:id])
+    @actors = Actor.includes(:movies).where(movie_id: @movie.id)
+    render json: @actors, status: :ok
+  end
+
   private
 
   def find_movie
