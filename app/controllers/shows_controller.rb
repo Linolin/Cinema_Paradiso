@@ -68,7 +68,7 @@ class ShowsController < ApplicationController
       if @seatsString && @seatsString != "" && @seatsString.length % 3 == 0
         alreadyReserved = false
         if DateTime.now > @show.datetime - 30.minutes && !current_user.admin
-          render nothing: true, status: :bad_request
+          render json: "timelimit", status: :bad_request
         else
           reservation = Reservation.new(user: @user, show: @show)
           (0..((@seatsString.length - 3) / 3)).each do |i|
@@ -85,16 +85,16 @@ class ShowsController < ApplicationController
             reservation.save
           end
           if alreadyReserved
-            render nothing: true, status: :bad_request
+            render json: "alreadyreserved", status: :bad_request
           else
             render json: reservation, stauts: :ok
           end
         end
       else 
-        render nothing: true, status: :bad_request
+        render json: "badrequest", status: :bad_request
       end
     elsif
-      render nothing: true, status: :unauthorized
+      render json: "baduser", status: :unauthorized
     end
   end
 end
