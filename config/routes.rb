@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   		get '/theaters/:id', to: 'theaters#api_show'
   		get '/seats/:theater_id', to: 'theaters#api_index_seats'
   		get '/reservations/:show_id', to: 'reservations#api_index_reserved_seats'
-      get '/shows/:id/reserve/:seats/:email/:password', to: 'shows#api_reserve_seats'
+      post '/shows/:id/reserve/:seats/:email/:password', to: 'shows#api_reserve_seats'
   	end
   end
   # The priority is based upon order of creation: first created -> highest priority.
