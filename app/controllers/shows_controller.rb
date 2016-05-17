@@ -49,6 +49,11 @@ class ShowsController < ApplicationController
       end
   end
 
+  def destroy
+    @show = Show.find(params[:id])
+    @show.destroy
+  end
+
   def api_index
     time_range = (DateTime.now.beginning_of_day())..((DateTime.now + (6 * 24).hours).end_of_day())
     @shows = Show.all.where('datetime' => time_range).order("datetime ASC")

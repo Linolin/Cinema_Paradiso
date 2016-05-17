@@ -30,6 +30,9 @@
 		<% if show.datetime < DateTime.now %>
 			<% next %>
 		<% end %>
+		<% if show.movie == nil %>
+			<% next %>
+		<% end %>
 		<div class="show">
 			<div class="info">
 				<a href="movies/<%= show.movie.id %>">
