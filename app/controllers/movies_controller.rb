@@ -2,7 +2,8 @@ class MoviesController < ApplicationController
 	before_action :find_movie, only: [:show, :edit, :update, :destroy]
 
   def index
-  	@movies = Movie.includes(:shows).order('shows.datetime ASC')
+    time_range = DateTime.now.beginning_of_day()..DateTime.now.end_of_day() + 365.day
+  	@movies = Movie.includes(:shows).order('shows.datetime ASC').where('shows.datetime' => time_range)
   end
 
   def new
