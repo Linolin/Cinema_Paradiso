@@ -68,7 +68,7 @@ class ShowsController < ApplicationController
       if @seatsString && @seatsString != "" && @seatsString.length % 3 == 0
         alreadyReserved = false
         if DateTime.now > @show.datetime - 30.minutes && !current_user.admin
-          render json: "timelimit", status: :ok
+          render json: "È possible prenotare i biglietti solo fino a 30 minuti prima dell’inizio di ogni spettacolo", status: :bad_request
         else
           reservation = Reservation.new(user: @user, show: @show)
           (0..((@seatsString.length - 3) / 3)).each do |i|
@@ -85,16 +85,16 @@ class ShowsController < ApplicationController
             reservation.save
           end
           if alreadyReserved
-            render json: "alreadyreserved", status: :ok
+            render json: "Uno dei posti scelti è stato prenotato nel frattempo", status: :bad_request
           else
-            render json: "ok", stauts: :ok
+            render json: reservation, stauts: :ok
           end
         end
       else 
-        render json: "badrequest", status: :ok
+        render json: "Si è verificato un errore", status: :bad_request
       end
     elsif
-      render json: "baduser", status: :ok
+      render json: "Email o password non corrette", status: :unauthorized
     end
   end
 end
