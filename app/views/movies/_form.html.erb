@@ -69,7 +69,7 @@
 				<script>
 					var baseurl;
     				var request = new XMLHttpRequest();
-					request.open('GET', 'http://api.themoviedb.org/3/configuration?api_key=663428f9bca787c67552f9c76c0362b9');
+					request.open('GET', 'https://api.themoviedb.org/3/configuration?api_key=663428f9bca787c67552f9c76c0362b9');
 					request.setRequestHeader('Accept', 'application/json');
 					request.onreadystatechange = function () {
   						if (this.readyState === 4) {
@@ -99,7 +99,7 @@
 					function findMovie(t, language) {
 						t = escape(t);
     					var request = new XMLHttpRequest();
-						request.open('GET', 'http://api.themoviedb.org/3/search/movie?api_key=663428f9bca787c67552f9c76c0362b9&query=' + t + '&language=' + language);
+						request.open('GET', 'https://api.themoviedb.org/3/search/movie?api_key=663428f9bca787c67552f9c76c0362b9&query=' + t + '&language=' + language);
 						request.setRequestHeader('Accept', 'application/json');
 						request.onreadystatechange = function () {
   							if (this.readyState === 4) {
@@ -125,7 +125,7 @@
 
 					function getMovieInfo(id, language) {
 						var request = new XMLHttpRequest();
-						request.open('GET', 'http://api.themoviedb.org/3/movie/' + id + '?api_key=663428f9bca787c67552f9c76c0362b9&language=' + language);
+						request.open('GET', 'https://api.themoviedb.org/3/movie/' + id + '?api_key=663428f9bca787c67552f9c76c0362b9&language=' + language);
 						request.setRequestHeader('Accept', 'application/json');
 						request.onreadystatechange = function () {
   							if (this.readyState === 4) {
@@ -157,7 +157,7 @@
 
 					function getMovieActorsAndDirector(id) {
 						var request = new XMLHttpRequest();
-						request.open('GET', 'http://api.themoviedb.org/3/movie/' + id + '/credits?api_key=663428f9bca787c67552f9c76c0362b9');
+						request.open('GET', 'https://api.themoviedb.org/3/movie/' + id + '/credits?api_key=663428f9bca787c67552f9c76c0362b9');
 						request.setRequestHeader('Accept', 'application/json');
 						request.onreadystatechange = function () {
 							if (this.readyState === 4) {
@@ -191,7 +191,7 @@
 
 					function getMovieTrailerURL(id) {
 						var request = new XMLHttpRequest();
-						request.open('GET', 'http://api.themoviedb.org/3/movie/' + id + '/videos?api_key=663428f9bca787c67552f9c76c0362b9');
+						request.open('GET', 'https://api.themoviedb.org/3/movie/' + id + '/videos?api_key=663428f9bca787c67552f9c76c0362b9');
 						request.setRequestHeader('Accept', 'application/json');
 						request.onreadystatechange = function () {
   							if (this.readyState === 4) {
