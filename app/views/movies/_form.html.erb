@@ -108,15 +108,15 @@
    								obj = obj.results[0];  // Best result.
    								if (obj != null) {
    									$(".autocomplete").removeClass("hidden");
-   								}
-   								// Get title.
-   								title = obj.title;
-   								$("#found_title").text(title);
-   								// Get id.
-   								var newId = obj.id;
-   								if (id != newId) {
-   									// Update movie info.
-   									getMovieInfo(newId, language);
+   									// Get title.
+   									title = obj.title;
+   									$("#found_title").text(title);
+   									// Get id.
+   									var newId = obj.id;
+   									if (id != newId) {
+   										// Update movie info.
+   										getMovieInfo(newId, language);
+   									}
    								}
   							}
 						};
@@ -198,7 +198,7 @@
    								var response = this.responseText;
    								var obj = JSON.parse(response);
    								// Get trailer url.
-   								if (obj.results.count > 0) {
+   								if (obj.results.length > 0) {
    									trailer_url = obj.results[0].key;
    								}
    								
