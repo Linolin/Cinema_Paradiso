@@ -41,7 +41,7 @@
 			</div>
 		<% end %>
 		<% @movies.each do |movie| %>
-			<% unless (current_user && current_user.admin) || !movie.shows.where(datetime: (DateTime.now.beginning_of_day()..(DateTime.now + (6 * 24).hours).end_of_day())).empty? || movie.shows == nil %>
+			<% unless (current_user && current_user.admin && movie.shows == nil) || !movie.shows.where(datetime: (DateTime.now.beginning_of_day()..(DateTime.now + (6 * 24).hours).end_of_day())).empty? %>
 				<% next %>
 			<% end %>
 			<div class="movie">
