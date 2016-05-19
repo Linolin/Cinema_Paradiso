@@ -8,6 +8,7 @@ class CreateMovies < ActiveRecord::Migration
       t.references :actor
       t.string :genere
       t.string :trailer_url
+      t.string :poster_url
 
       t.timestamps null: false
     end

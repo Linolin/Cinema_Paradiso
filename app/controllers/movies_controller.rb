@@ -3,7 +3,7 @@ class MoviesController < ApplicationController
 
   def index
     time_range = DateTime.now.beginning_of_day()..DateTime.now.end_of_day() + 365.day
-  	@movies = Movie.includes(:shows).order('shows.datetime ASC').where('shows.datetime' => time_range)
+  	@movies = Movie.includes(:shows).order('shows.datetime ASC')#.where("shows.datetime > ?  OR shows = ?", DateTime.now, nil)
   end
 
   def new
@@ -12,6 +12,9 @@ class MoviesController < ApplicationController
 
   def create
   	@movie = Movie.new(movie_params)
+    if @movie.poster_url != nil && @movie.poster_url != ""
+      @movie.poster_from_url @movie.poster_url
+    end
     @movie.trailer_url = sanitize_trailer_url(@movie.trailer_url)
   	if @movie.save
   		redirect_to @movie
@@ -29,6 +32,9 @@ class MoviesController < ApplicationController
 
   def update
 		if @movie.update(movie_params)
+      if @movie.poster_url != nil && @movie.poster_url != ""
+        @movie.poster_from_url @movie.poster_url
+      end
       @movie.trailer_url = sanitize_trailer_url(@movie.trailer_url)
       @movie.save
 			redirect_to @movie
@@ -73,6 +79,6 @@ class MoviesController < ApplicationController
   end
 
   def movie_params
-  	params.require(:movie).permit(:title, :poster, :plot, :duration, :director, :genere, :trailer_url, actors_attributes: [:id, :name, :_destroy], shows_attributes: [:id, :datetime, :theater_id, :price, :_destroy])
+  	params.require(:movie).permit(:title, :poster, :poster_url, :plot, :duration, :director, :genere, :trailer_url, actors_attributes: [:id, :name, :_destroy], shows_attributes: [:id, :datetime, :theater_id, :price, :_destroy])
   end
 end

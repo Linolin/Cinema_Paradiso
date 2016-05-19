@@ -5,4 +5,8 @@ class Movie < ActiveRecord::Base
 	validates_attachment_content_type :poster, content_type: /\Aimage\/.*\Z/
 	accepts_nested_attributes_for :actors, reject_if: proc {|attributes| attributes["name"].blank?}, allow_destroy: true
 	accepts_nested_attributes_for :shows, :reject_if => proc { |attributes| attributes.any? {|k, v| v.blank?} }, allow_destroy: true
+
+	def poster_from_url(url)
+  		self.poster = URI.parse(url)
+	end
 end

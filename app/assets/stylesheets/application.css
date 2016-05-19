@@ -587,9 +587,41 @@ input.nav_item {
 	width: 100%;
 }
 
+.movies_form .info .poster .movie_poster_url label {
+	display: none;
+}
+
 .movies_form .info .title input {
 	color: #51B7CB;
 	font: 22px "Ubuntu", "Trebuchet MS", sans-serif;
+}
+
+.movies_form .info .autocomplete {
+	color: #212121;
+	cursor: pointer;
+	display: inline-block;
+	height: 33px;
+	margin-bottom: 22px;
+	margin-top: -10px;
+}
+
+.movies_form .info .autocomplete.hidden {
+	display: none;
+}
+
+.movies_form .info .autocomplete .found_title {
+	color: #999999;
+	font: 22px "Ubuntu", "Trebuchet MS", sans-serif;
+}
+
+.movies_form .info .autocomplete .autocomplete_button {
+	color: #212121;
+	text-transform: uppercase;
+	font: 14px "Arial Black", sans-serif;	
+}
+
+.movies_form .info .autocomplete:hover .autocomplete_button {
+	color: #51B7CB;
 }
 
 .movies_form .info .plot textarea {

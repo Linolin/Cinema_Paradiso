@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20160503171246) do
     t.integer  "actor_id"
     t.string   "genere"
     t.string   "trailer_url"
+    t.string   "poster_url"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.string   "poster_file_name"
