@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   		get '/theaters/:id', to: 'theaters#api_show'
   		get '/seats/:theater_id', to: 'theaters#api_index_seats'
   		get '/reservations/:show_id', to: 'reservations#api_index_reserved_seats'
+      get '/reservations/for_user/:email/:password', to: 'reservations#api_index_user_reservations'
+      get '/reservations/:id/seats', to: 'reservations#api_index_reservation_seats'
       get '/shows/:id/reserve/:seats/:email/:password', to: 'shows#api_reserve_seats'
   	end
   end

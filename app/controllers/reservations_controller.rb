@@ -44,6 +44,22 @@ class ReservationsController < ApplicationController
     render json: @seats, status: :ok
   end
 
+  def api_index_user_reservations
+    @user = User.find_by_email(params[:email])
+    if @user && @user.valid_password?(params[:password])
+      @reservation = Reservation.where(user: @user)
+      render json: @reservation, status: :ok
+    else
+      render json: "Email o password non corrette", status: :unauthorized
+    end
+  end
+
+  def api_index_reservation_seats
+    @reservation = Reservation.find(params[:id])
+    @seats = Seat.includes(:reservations).where('reservations.id' => @reservation.id)
+    render json: @seats, status: :ok
+  end
+
   private
 
   def reservation_params
