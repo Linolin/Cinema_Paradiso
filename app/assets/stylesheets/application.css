@@ -324,7 +324,7 @@ input.nav_item {
 
 .movies_index .movies .movie .info .title {
 	color: #212121;
-	font-family: "Ubuntu";
+	font-family: "Ubuntu", "Trebuchet MS", sans-serif;
 	font-size: 20px;
 	margin-bottom: 8px;
 	text-align: center;
@@ -1186,7 +1186,7 @@ input.nav_item {
 
 .reservations_show .info .seats .screen-container {
 	color: #212121;
-	font-family: "Ubuntu";
+	font-family: "Ubuntu", "Trebuchet MS", sans-serif;
 	font-size: 14px;
 	margin-bottom: 65px;
 }
@@ -1216,7 +1216,7 @@ input.nav_item {
 	color: #212121;
 	display: inline-block;
 	height: 16px;
-	font-family: "Ubuntu";
+	font-family: "Ubuntu", "Trebuchet MS", sans-serif;
 	font-size: 14px;
 	line-height: 16px;
 	margin-bottom: 5px;
